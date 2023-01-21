@@ -9,9 +9,10 @@ export function useAuth(){
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
+    
 
-    async function signUp (email, password) {
-        return await createUserWithEmailAndPassword(email, password);
+    async function signUp (auth, email, password) {
+        return await createUserWithEmailAndPassword(auth, email, password);
     }
 
     useEffect( () => {
