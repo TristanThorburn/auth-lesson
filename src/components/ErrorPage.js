@@ -1,4 +1,15 @@
-// import { useRouteError } from "react-router-dom";
+const ErrorPage = () => {
+    return (
+      <div>
+        <h1>404!</h1>
+        <p>An error has occurred!</p>
+      </div>
+    )
+  }
+
+  export default ErrorPage;
+
+  // import { useRouteError } from "react-router-dom";
 
 // export default function ErrorPage() {
 //   const error = useRouteError();
@@ -14,14 +25,3 @@
 //     </div>
 //   );
 // }
-
-const ErrorPage = () => {
-    return (
-      <div>
-        <h1>404!</h1>
-        <p>An error has occurred!</p>
-      </div>
-    )
-  }
-
-  export default ErrorPage;

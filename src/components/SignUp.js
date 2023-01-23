@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -9,6 +9,7 @@ export default function SignUp() {
     const { signUp, currentUser } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     async function handleSubmit (e) {
         e.preventDefault();
@@ -21,6 +22,7 @@ export default function SignUp() {
             setError('')
             setLoading(true)
             await signUp(emailRef.current.value, passwordRef.current.value)
+            navigate("/")
         } catch {
             setError('Failed to create an account')
         }
@@ -73,7 +75,7 @@ export default function SignUp() {
                     required />
             </div>    
 
-            <button type="submit" disabled={loading}>Create Account</button> 
+            <button type="submit" disabled={loading || currentUser}>Create Account</button> 
 
         </form>
 

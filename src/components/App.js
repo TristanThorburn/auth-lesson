@@ -5,6 +5,9 @@ import SignUp from "./SignUp";
 import DashBoard from './DashBoard';
 import LogIn from './LogIn';
 import ErrorPage from './ErrorPage';
+import UpdateProfile from './UpdateProfile';
+import PrivateRoutes from './PrivateRoutes';
+import ForgotPassword from './ForgotPassword';
 
 function App() {
   return (
@@ -12,10 +15,14 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route exact path="/" element={<DashBoard />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
-            <Route path="/login" element={<LogIn />}></Route>
-            <Route path="*" element={<ErrorPage />}></Route>
+            <Route element={<PrivateRoutes />}>
+              <Route exact path="/" element={<DashBoard />} />
+              <Route path="/update-profile" element={<UpdateProfile />} />
+            </Route>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </AuthProvider>
       </Router>    
