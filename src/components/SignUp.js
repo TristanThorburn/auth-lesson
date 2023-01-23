@@ -1,8 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import app from '../firebase';
-import { getAuth } from 'firebase/auth';
-
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -11,7 +8,6 @@ export default function SignUp() {
     const { signUp } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const auth = getAuth(app);
 
     async function handleSubmit (e) {
         e.preventDefault();
@@ -23,7 +19,7 @@ export default function SignUp() {
         try {
             setError('')
             setLoading(true)
-            await signUp(auth, emailRef.current.value, passwordRef.current.value)
+            await signUp(emailRef.current.value, passwordRef.current.value)
         } catch {
             setError('Failed to create an account')
         }
@@ -35,6 +31,7 @@ export default function SignUp() {
         <form action="" onSubmit={handleSubmit}>
 
             <h2>Sign Up</h2>
+            {/* <h3>Signed in as {user.email}</h3> */}
 
             <div className="errorMessage">{error}</div>
 
