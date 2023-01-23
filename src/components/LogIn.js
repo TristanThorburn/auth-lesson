@@ -2,36 +2,31 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-export default function SignUp() {
+export default function LogIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
-    const { signUp, currentUser } = useAuth();
+    const { logIn, currentUser } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit (e) {
         e.preventDefault();
 
-        if(passwordRef.current.value !== passwordConfirmRef.current.value){
-            return setError('Passwords do not match')
-        }
-
         try {
             setError('')
             setLoading(true)
-            await signUp(emailRef.current.value, passwordRef.current.value)
+            await logIn(emailRef.current.value, passwordRef.current.value)
         } catch {
-            setError('Failed to create an account')
+            setError('Failed to log in')
         }
         setLoading(false)        
     }
 
   return (
-    <div className="signUp"> 
+    <div className="logIn"> 
         <form action="" onSubmit={handleSubmit}>
 
-            <h2>Sign Up</h2>
+            <h2>Log In</h2>
             
             {currentUser
                 ? <div>Logged in as: {currentUser.email}</div>
@@ -63,22 +58,12 @@ export default function SignUp() {
                     required />
             </div>
 
-            <div>
-                <label htmlFor="passwordConfirm">Confirm Password</label>
-                <input 
-                    type="password" 
-                    name="passwordConfirm" 
-                    id="passwordConfirm" 
-                    ref={passwordConfirmRef} 
-                    required />
-            </div>    
-
-            <button type="submit" disabled={loading}>Create Account</button> 
+            <button type="submit" disabled={loading}>Log In</button> 
 
         </form>
 
         <div>
-            <p>Already have an account? <Link to="/login">Log In</Link></p>
+            <p>Need an account? <Link to="/signup">Sign Up</Link></p>
         </div>
     </div>
   )
