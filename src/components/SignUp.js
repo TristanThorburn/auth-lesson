@@ -6,7 +6,7 @@ export default function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signUp, currentUser } = useAuth();
+    const { signUp } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function SignUp() {
             setError('')
             setLoading(true)
             await signUp(emailRef.current.value, passwordRef.current.value)
-            navigate("/")
+            navigate('/')
         } catch {
             setError('Failed to create an account')
         }
@@ -30,15 +30,10 @@ export default function SignUp() {
     }
 
   return (
-    <div className="signUp"> 
-        <form action="" onSubmit={handleSubmit}>
+    <div className='signUp'> 
+        <form action='' onSubmit={handleSubmit}>
 
             <h2>Sign Up</h2>
-            
-            {currentUser
-                ? <div>Logged in as: {currentUser.email}</div>
-                : null
-            }
 
             {error
                 ? <div className='authError'>{error}</div>
@@ -46,11 +41,11 @@ export default function SignUp() {
             }
 
             <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor='email'>Email</label>
                 <input 
-                    type="text" 
-                    name="email" 
-                    id="email" 
+                    type='text' 
+                    name='email'
+                    id='email' 
                     ref={emailRef} 
                     required />
             </div>    
@@ -58,29 +53,29 @@ export default function SignUp() {
             <div>
                 <label htmlFor="password">Password</label>
                 <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
+                    type='password'
+                    name='password' 
+                    id='password' 
                     ref={passwordRef} 
                     required />
             </div>
 
             <div>
-                <label htmlFor="passwordConfirm">Confirm Password</label>
+                <label htmlFor='passwordConfirm'>Confirm Password</label>
                 <input 
-                    type="password" 
-                    name="passwordConfirm" 
-                    id="passwordConfirm" 
+                    type='password' 
+                    name='passwordConfirm'
+                    id='passwordConfirm'
                     ref={passwordConfirmRef} 
                     required />
             </div>    
 
-            <button type="submit" disabled={loading || currentUser}>Create Account</button> 
+            <button type='submit' disabled={loading}>Create Account</button> 
 
         </form>
 
         <div>
-            <p>Already have an account? <Link to="/login">Log In</Link></p>
+            <p>Already have an account? <Link to='/login'>Log In</Link></p>
         </div>
     </div>
   )

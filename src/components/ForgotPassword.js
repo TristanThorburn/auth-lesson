@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function ForgotPassword() {
     const emailRef = useRef();
-    const { resetPassword, currentUser } = useAuth();
+    const { resetPassword } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('')
@@ -24,39 +24,39 @@ export default function ForgotPassword() {
     }
 
   return (
-    <div className="logIn"> 
-        <form action="" onSubmit={handleSubmit}>
+    <div className='forgotPassword'> 
+        <form action='' onSubmit={handleSubmit}>
 
             <h2>Reset Password</h2>
-            
-            {currentUser
-                ? <div>Logged in as: {currentUser.email}</div>
-                : null
-            }
 
             {message
                 ? <div>{message}</div>
                 : null
             }
 
+            {error
+                ? <div>{error}</div>
+                : null
+            }
+
             <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor='email'>Email</label>
                 <input 
-                    type="text" 
-                    name="email" 
-                    id="email" 
+                    type='text' 
+                    name='email'
+                    id='email' 
                     ref={emailRef} 
                     required />
             </div>
 
-            <button type="submit" disabled={loading || currentUser}>Reset Password</button>
+            <button type='submit' disabled={loading}>Reset Password</button>
 
             <div><Link to='/login'>Log In</Link></div> 
 
         </form>
 
         <div>
-            <p>Need an account? <Link to="/signup">Sign Up</Link></p>
+            <p>Need an account? <Link to='/signup'>Sign Up</Link></p>
         </div>
     </div>
   )

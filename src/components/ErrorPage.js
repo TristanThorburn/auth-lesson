@@ -1,27 +1,11 @@
-const ErrorPage = () => {
-    return (
-      <div>
+import { Link } from 'react-router-dom';
+
+export default function ErrorPage() {
+  return (
+    <div className='errorPage'>
         <h1>404!</h1>
-        <p>An error has occurred!</p>
+        <p>The page you are looking for doesnt exist</p>
+        <p><Link to='/'>Back to Dashboard</Link></p>
       </div>
-    )
-  }
-
-  export default ErrorPage;
-
-  // import { useRouteError } from "react-router-dom";
-
-// export default function ErrorPage() {
-//   const error = useRouteError();
-//   console.error(error);
-
-//   return (
-//     <div id="error-page">
-//       <h1>Oops!</h1>
-//       <p>Sorry, an unexpected error has occurred.</p>
-//       <p>
-//         <i>{error.statusText || error.message}</i>
-//       </p>
-//     </div>
-//   );
-// }
+  )
+}

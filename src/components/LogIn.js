@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function LogIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { logIn, currentUser } = useAuth();
+    const { logIn } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function LogIn() {
             setError('')
             setLoading(true)
             await logIn(emailRef.current.value, passwordRef.current.value)
-            navigate("/")
+            navigate('/')
         } catch {
             setError('Failed to log in')
         }
@@ -25,15 +25,10 @@ export default function LogIn() {
     }
 
   return (
-    <div className="logIn"> 
-        <form action="" onSubmit={handleSubmit}>
+    <div className='logIn'> 
+        <form action='' onSubmit={handleSubmit}>
 
             <h2>Log In</h2>
-            
-            {currentUser
-                ? <div>Logged in as: {currentUser.email}</div>
-                : null
-            }
 
             {error
                 ? <div className='authError'>{error}</div>
@@ -41,11 +36,11 @@ export default function LogIn() {
             }
 
             <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor='email'>Email</label>
                 <input 
-                    type="text" 
-                    name="email" 
-                    id="email" 
+                    type='text' 
+                    name='email'
+                    id='email' 
                     ref={emailRef} 
                     required />
             </div>    
@@ -53,21 +48,21 @@ export default function LogIn() {
             <div>
                 <label htmlFor="password">Password</label>
                 <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
+                    type='password'
+                    name='password' 
+                    id='password' 
                     ref={passwordRef} 
                     required />
             </div>
 
-            <button type="submit" disabled={loading || currentUser}>Log In</button>
+            <button type='submit' disabled={loading}>Log In</button>
 
-            <div><Link to='/forgot-password'>Forgot Password?</Link></div> 
+            <div className='forgotPassword'><Link to='/forgot-password'>Forgot Password?</Link></div> 
 
         </form>
 
         <div>
-            <p>Need an account? <Link to="/signup">Sign Up</Link></p>
+            <p>Need an account? <Link to='/signup'>Sign Up</Link></p>
         </div>
     </div>
   )
