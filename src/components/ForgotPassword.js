@@ -17,8 +17,8 @@ export default function ForgotPassword() {
             setLoading(true)
             await resetPassword(emailRef.current.value)
             setMessage('Check your email inbox for futher instructions')
-        } catch {
-            setError('Failed to reset password')
+        } catch(error) {
+            setError(error.message)
         }
         setLoading(false)        
     }
@@ -35,7 +35,7 @@ export default function ForgotPassword() {
             }
 
             {error
-                ? <div>{error}</div>
+                ? <div className='authError'>{error}</div>
                 : null
             }
 
